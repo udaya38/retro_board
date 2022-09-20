@@ -4,8 +4,10 @@ const server = require('http').Server(app)
 const io = require('socket.io')(server,{cors:{
     origin: '*'
 }})
-
-server.listen(3000);
+app.get('/',()=>{
+    console.log("hello")
+})
+server.listen(process.env.PORT || 3000);
 io.on('connection', socket => {
     socket.on('join-room',room =>{
         socket.join(room);
