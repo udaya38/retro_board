@@ -6,11 +6,9 @@ const serverless = require("serverless-http");
 const http = require("http");
 const socketio = require("socket.io");
 const server = http.createServer(app);
+socketio.set('transports',['xhr-polling']);
 const io = socketio(server, {
-  cors: {
-    origin: "*",
-  },
-  path: "/socket.io",
+  path: "/socket.io"
 });
 
 app.use(cors());
