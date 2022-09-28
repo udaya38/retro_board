@@ -12,7 +12,7 @@ const io = socketio(server, {
   path: "/socket.io",
   allowEIO3: true
 });
-
+io.set('transports', ['websocket']);
 router.get("/", (req, res) => {
   res.send("Server is up and running");
 });
