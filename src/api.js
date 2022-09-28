@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors=require("cors");
 const router = express.Router();
 const serverless = require("serverless-http");
 const http = require('http');
@@ -8,6 +9,8 @@ const server=http.createServer(app);
 const io=socketio(server,{cors:{
     origin: '*'
 }});
+
+app.use(cors());
 
 router.get('/',(req,res)=>{
     res.send('Server is up and running')
