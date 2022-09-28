@@ -6,12 +6,11 @@ const serverless = require("serverless-http");
 const http = require("http");
 const socketio = require("socket.io");
 const server = http.createServer(app);
-socketio.set('transports',['xhr-polling']);
+app.use(cors());
+
 const io = socketio(server, {
   path: "/socket.io"
 });
-
-app.use(cors());
 
 router.get("/", (req, res) => {
   res.send("Server is up and running");
