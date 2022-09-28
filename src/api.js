@@ -9,7 +9,8 @@ const server = http.createServer(app);
 app.use(cors());
 
 const io = socketio(server, {
-  path: "/socket.io"
+  path: "/socket.io",
+  allowEIO3: true
 });
 
 router.get("/", (req, res) => {
