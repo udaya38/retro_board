@@ -1,5 +1,7 @@
 const express = require('express');
-const app = express()
+const app = express();
+const router = express.Router();
+const serverless = require("serverless-http");
 const http = require('http');
 const socketio = require('socket.io');
 const server=http.createServer(app);
@@ -7,9 +9,10 @@ const io=socketio(server,{cors:{
     origin: '*'
 }});
 
-app.get('/',(req,res)=>{
+router.get('/',(req,res)=>{
     res.send('Server is up and running')
 })
+app.use('/.netlify/functions/api',router);
 server.listen(process.env.PORT || 3000);
 io.on('connection', socket => {
     socket.on('join-room',room =>{
@@ -37,4 +40,4 @@ io.on('connection', socket => {
     })
 });
 
-module.exports = server;
+module.exports.handler=serverless(app);
